@@ -77,15 +77,9 @@
      {:lifecycle/task :in-again
       :lifecycle/calls :onyx.plugin.core-async/writer-calls}
 
-     {:lifecycle/task :loud-output
+     {:lifecycle/task :out-chan
       :lifecycle/calls :onyx-starter.lifecycles.sample-lifecycle/out-calls
       :core.async/id (java.util.UUID/randomUUID)
       :lifecycle/doc "Lifecycle for writing to a core.async chan"}
-     {:lifecycle/task :loud-output
-      :lifecycle/calls :onyx.plugin.core-async/writer-calls}
-     {:lifecycle/task :question-output
-      :lifecycle/calls :onyx-starter.lifecycles.sample-lifecycle/out-calls
-      :core.async/id (java.util.UUID/randomUUID)
-      :lifecycle/doc "Lifecycle for writing to a core.async chan"}
-     {:lifecycle/task :question-output
+     {:lifecycle/task :out-chan
       :lifecycle/calls :onyx.plugin.core-async/writer-calls}]))

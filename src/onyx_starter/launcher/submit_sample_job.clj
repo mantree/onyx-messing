@@ -2,7 +2,7 @@
   (:require [com.stuartsierra.component :as component]
             [clojure.java.io :refer [resource]]
             [onyx-starter.launcher.dev-system :refer [onyx-dev-env]]
-            [onyx-starter.workflows.sample-workflow :refer [workflow looped-flow]]
+            [onyx-starter.workflows.sample-workflow :refer [looped-flow]]
             [onyx-starter.catalogs.sample-catalog :refer [build-catalog] :as sc]
             [onyx-starter.lifecycles.sample-lifecycle :refer [build-lifecycles] :as sl]
             [onyx-starter.flow-conditions.sample-flow-conditions :refer [flow-conditions]]
@@ -26,4 +26,4 @@
       ;; Automatically grab output from the stubbed core.async channels,
       ;; returning a vector of the results with data structures representing
       ;; the output.
-      (sl/collect-outputs! dev-lifecycles [:loud-output]))))
+      (sl/collect-outputs! dev-lifecycles [:out-chan]))))
