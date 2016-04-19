@@ -7,3 +7,7 @@
     [{:sentence "Hey there user"}
      {:sentence "It's really nice outside"}
      {:sentence "I live in Redmond"}])
+
+(def looped-input
+  [{:value 1}
+   {:value 10}])

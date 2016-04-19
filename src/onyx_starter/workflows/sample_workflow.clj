@@ -10,3 +10,12 @@
    [:mixed-case :question]
    [:loud :loud-output]
    [:question :question-output]])
+
+
+
+(def looped-flow
+  [[:in :add]
+   [:add :mult]
+   [:mult :add-bang]
+   [:mult :in-again]
+   [:add-bang :loud-output]])

@@ -47,30 +47,45 @@
 (defn inject-in-ch [event lifecycle]
   {:core.async/chan (get-input-channel (:core.async/id lifecycle))})
 
+(defn inject-in-again-ch [event lifecycle]
+  {:core.async/chan (get-input-channel (:core.async/id lifecycle))})
+
 (defn inject-out-ch [event lifecycle]
   {:core.async/chan (get-output-channel (:core.async/id lifecycle))})
 
 (def in-calls
   {:lifecycle/before-task-start inject-in-ch})
 
+
+(def in-again-calls
+  {:lifecycle/before-task-start inject-in-again-ch})
+
 (def out-calls
   {:lifecycle/before-task-start inject-out-ch})
 
 (defn build-lifecycles []
-  [{:lifecycle/task :in
-    :core.async/id (java.util.UUID/randomUUID)
-    :lifecycle/calls :onyx-starter.lifecycles.sample-lifecycle/in-calls}
-   {:lifecycle/task :in
-    :lifecycle/calls :onyx.plugin.core-async/reader-calls}
-   {:lifecycle/task :loud-output
-    :lifecycle/calls :onyx-starter.lifecycles.sample-lifecycle/out-calls
-    :core.async/id (java.util.UUID/randomUUID)
-    :lifecycle/doc "Lifecycle for writing to a core.async chan"}
-   {:lifecycle/task :loud-output
-    :lifecycle/calls :onyx.plugin.core-async/writer-calls}
-   {:lifecycle/task :question-output
-    :lifecycle/calls :onyx-starter.lifecycles.sample-lifecycle/out-calls
-    :core.async/id (java.util.UUID/randomUUID)
-    :lifecycle/doc "Lifecycle for writing to a core.async chan"}
-   {:lifecycle/task :question-output
-    :lifecycle/calls :onyx.plugin.core-async/writer-calls}])
+  (let [in-id (java.util.UUID/randomUUID)]
+    [{:lifecycle/task :in
+      :core.async/id in-id
+      :lifecycle/calls :onyx-starter.lifecycles.sample-lifecycle/in-calls}
+     {:lifecycle/task :in
+      :lifecycle/calls :onyx.plugin.core-async/reader-calls}
+
+     {:lifecycle/task :in-again
+      :core.async/id in-id
+      :lifecycle/calls :onyx-starter.lifecycles.sample-lifecycle/in-again-calls}
+     {:lifecycle/task :in-again
+      :lifecycle/calls :onyx.plugin.core-async/writer-calls}
+
+     {:lifecycle/task :loud-output
+      :lifecycle/calls :onyx-starter.lifecycles.sample-lifecycle/out-calls
+      :core.async/id (java.util.UUID/randomUUID)
+      :lifecycle/doc "Lifecycle for writing to a core.async chan"}
+     {:lifecycle/task :loud-output
+      :lifecycle/calls :onyx.plugin.core-async/writer-calls}
+     {:lifecycle/task :question-output
+      :lifecycle/calls :onyx-starter.lifecycles.sample-lifecycle/out-calls
+      :core.async/id (java.util.UUID/randomUUID)
+      :lifecycle/doc "Lifecycle for writing to a core.async chan"}
+     {:lifecycle/task :question-output
+      :lifecycle/calls :onyx.plugin.core-async/writer-calls}]))

@@ -19,6 +19,31 @@
 (defn question-impl [s]
   (str s "?"))
 
+(defn add
+  [segment]
+  (update segment :value inc))
+
+(defn mult 
+  [segment]
+  (update segment :value (partial * 10)))
+
+(defn add-bang
+  [segment]
+  (update segment :value (partial str "!")))
+
+(defn enough?
+  [event {:keys [value]} _ _]
+  (if (> value 100)
+    true
+    false))
+
+(defn never
+  [event {:keys [value]} _ _]
+  false)
+(defn always
+  [event {:keys [value]} _ _]
+  true)
+
 ;;;;; Destructuring functions ;;;;;
 (defn split-by-spaces [segment]
   (map (fn [word] {:word word}) (split-by-spaces-impl (:sentence segment))))
